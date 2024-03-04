@@ -1,8 +1,6 @@
 # Min-Llama Assignment
 by Vijay Viswanathan (based on the previous [minbert-assignment](https://github.com/neubig/minbert-assignment))
 
-This is an exercise in developing a minimalist version of Llama2, part of Carnegie Mellon University's [CS11-711 Advanced NLP](http://phontron.com/class/anlp2024/).
-
 In this assignment, you will implement some important components of the Llama2 model to better understanding its architecture. 
 You will then perform sentence classification on ``sst`` dataset and ``cfimdb`` dataset with this model.
 
@@ -65,14 +63,13 @@ Mean reference accuracies over 10 random seeds with their standard deviation sho
 ### Submission
 
 **Code:**
-You will submit a full code package, with output files, on **Canvas**. This package will be checked by the TAs in the 1-2 weeks 
-   after the assignment for its correctness and executability.
+You will submit a full code package, with output files, on **Cogniterra**. 
 
 **Report (optional):** Your zip file can include a pdf file, named ANDREWID-report.pdf, if (1) you've implemented something else on top of the requirements and further improved accuracy for possible extra points (see "Grading" below), and/or (2) if your best results are with some hyperparameters other than the default, and you want to specify how we should run your code. If you're doing (1), we expect your report should be 1-2 pages, but no more than 3 pages. If you're doing (2), the report can be very brief.
 
 #### Canvas Submission
 
-For submission via [Canvas](https://canvas.cmu.edu/),
+For submission via [Cogniterra]([https://canvas.cmu.edu/](https://cogniterra.org/)),
 the submission file should be a zip file with the following structure (assuming the
 lowercase Andrew ID is ``ANDREWID``):
 ```
@@ -132,7 +129,7 @@ students lose a 1/3 letter grade because of an improper submission format.
 * B or below: Some parts of the missing pieces are not implemented.
 
 If your results can be confirmed through the submitted files, but there are problems with your
-code submitted through Canvas, such as not being properly formatted, not executing in
+code submitted through Cogniterra, such as not being properly formatted, not executing in
 the appropriate amount of time, etc., you will be graded down 1/3 grade (e.g. A+ -> A or A- -> B+).
 
 All assignments must be done individually and we will be running plagiarism detection
@@ -142,4 +139,7 @@ policy. That being said, *you are free to use publicly available resources* (e.g
 code), but you ***must provide proper attribution***.
 
 ### Acknowledgement
+
+This is an exercise forked and slightly changed from an exercise from Carnegie Mellon University's CS11-711 Advanced NLP course.
+
 This code is based on llama2.c by Andrej Karpathy. Parts of the code are also from the [`transformers`](https://github.com/huggingface/transformers) library ([Apache License 2.0](./LICENSE)).
