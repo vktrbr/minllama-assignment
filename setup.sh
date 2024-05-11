@@ -16,4 +16,4 @@ pip install scikit-learn==1.2.2
 pip install numpy==1.26.3
 pip install tokenizers==0.13.3
 pip install sentencepiece==0.1.99
-wget https://www.cs.cmu.edu/~vijayv/stories42M.pt
+curl https://www.cs.cmu.edu/~vijayv/stories42M.pt -o stories42M.pt
