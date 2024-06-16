@@ -38,23 +38,29 @@ class AdamW(Optimizer):
                 if grad.is_sparse:
                     raise RuntimeError("Adam does not support sparse gradients, please consider SparseAdam instead")
 
-                raise NotImplementedError()
-
                 # State should be stored in this dictionary
                 state = self.state[p]
+                state["step"] = state.get("step", 0) + 1
 
                 # Access hyperparameters from the `group` dictionary
                 alpha = group["lr"]
+                beta_1, beta_2 = group["betas"]
+                eps = group["eps"]
 
                 # Update first and second moments of the gradients
+                state["m1"] = beta_1 * state.get("m1", torch.zeros_like(p)) + (1 - beta_1) * grad
+                state["m2"] = beta_2 * state.get("m2", torch.zeros_like(p)) + (1 - beta_2) * grad * grad
 
                 # Bias correction
                 # Please note that we are using the "efficient version" given in
                 # https://arxiv.org/abs/1412.6980
+                m1_hat = alpha * ((1 - beta_2 ** state["step"]) ** 0.5) / (1 - beta_1 ** state["step"])
 
                 # Update parameters
+                p.data = p.data - m1_hat * state["m1"] / (state["m2"] ** 0.5 + eps)
 
                 # Add weight decay after the main gradient-based updates.
                 # Please note that the learning rate should be incorporated into this update.
+                p.data = p.data - alpha * group["weight_decay"] * p.data
 
         return loss

@@ -2,14 +2,15 @@
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 # This software may be used and distributed according to the terms of the Llama 2 Community License Agreement.
 
+import argparse
 import os
 import struct
-import argparse
 from typing import List
 
 from sentencepiece import SentencePieceProcessor
 
-TOKENIZER_MODEL = "tokenizer.model" # the llama sentencepiece tokenizer model
+TOKENIZER_MODEL = "tokenizer.model"  # the llama sentencepiece tokenizer model
+
 
 class Tokenizer:
     def __init__(self, max_len=None, tokenizer_model=None):
@@ -25,7 +26,7 @@ class Tokenizer:
         self.eos_id: int = self.sp_model.eos_id()
         # Overwrite the default of pad_id=-1, which is problematic.
         self.pad_id: int = self.sp_model.piece_to_id("<0x00>")
-        #print(f"#words: {self.n_words} - BOS ID: {self.bos_id} - EOS ID: {self.eos_id}")
+        # print(f"#words: {self.n_words} - BOS ID: {self.bos_id} - EOS ID: {self.eos_id}")
         assert self.sp_model.vocab_size() == self.sp_model.get_piece_size()
 
     def encode(self, s: str, bos: bool, eos: bool) -> List[int]:
@@ -55,8 +56,8 @@ class Tokenizer:
                 t = '\n<s>\n'
             elif i == self.eos_id:
                 t = '\n</s>\n'
-            t = t.replace('▁', ' ') # sentencepiece uses this character as whitespace
-            b = t.encode('utf-8') # bytes of this token, utf-8 encoded
+            t = t.replace('▁', ' ')  # sentencepiece uses this character as whitespace
+            b = t.encode('utf-8')  # bytes of this token, utf-8 encoded
 
             tokens.append(b)
             scores.append(s)
@@ -72,6 +73,7 @@ class Tokenizer:
             for bytes, score in zip(tokens, scores):
                 f.write(struct.pack("fI", score, len(bytes)))
                 f.write(bytes)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
