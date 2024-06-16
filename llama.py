@@ -290,7 +290,7 @@ class Llama(LlamaPreTrainedModel):
             # done
             if temperature == 0.0:
                 # select the single most likely index
-                idx_next = None
+                idx_next = torch.argmax(logits, dim=-1, keepdim=True)
             else:
                 '''
                 Perform temperature sampling:
@@ -306,6 +306,7 @@ class Llama(LlamaPreTrainedModel):
                 idx_next = torch.multinomial(scaled_probs, num_samples=1)
 
             # append sampled index to the running sequence and continue
+
             idx = torch.cat((idx, idx_next), dim=1)
 
         return idx
